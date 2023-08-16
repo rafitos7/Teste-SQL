@@ -1,0 +1,28 @@
+Insert into produtos(cod_prod, loj_prod, desc_prod, dt_inclu_prod, preco_prod) values (170, 2, "LEITE CONDENSADO MOCOCA", "30/12/2010", 45.40)
+
+Update produtos set 95.40 where cod_prod = 170 and loj_prod = 2
+
+Select * from produtos where loj_prod in (1, 2)
+
+Select max(dt_inclu_prod) from produtos
+
+Select min(dt_inclu_prod) from produtos
+
+Select count(*) from produtos
+
+Select * from produtos where desc_prod like "%L"
+
+Select sum(precos) from produtos group by loj_prod
+
+Select 
+PROD.loj_prod, LOJA.desc_loj, PROD.Cód_prod, PROD.desc_prod, PROD.preco_prod, EST.qtd_prod 
+from produtos as PROD 
+inner join Lojas as LOJA on LOJA.loj_prod = PROD.loj_prod 
+inner join Estoque as EST on EST.Cód_prod = PROD.Cód_prod and EST.loj_prod = LOJA.loj_prod 
+where LOJA.loj_prod = 1
+
+Select PROD.Cód_prod from Produtos as PROD
+WHERE Not EXISTS(SELECT EST.Cód_prod from Estoque as EST)
+
+Select EST.Cód_prod from Estoque as EST
+WHERE Not EXISTS(SELECT PROD.Cód_prod from Produtos as PROD)
